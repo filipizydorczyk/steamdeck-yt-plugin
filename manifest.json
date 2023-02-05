@@ -1,0 +1,13 @@
+{
+    "manifest_version": 3,
+    "name": "Steam Deck YouTube",
+    "description": "Plugin that adds more natural controls for steamdeck users",
+    "version": "1.0",
+    "permissions": ["activeTab"],
+    "content_scripts": [
+        {
+            "matches": ["*://*.youtube.com/*"],
+            "js": ["youtube.js", "steamdeck.js", "content.js"]
+        }
+    ]
+}
