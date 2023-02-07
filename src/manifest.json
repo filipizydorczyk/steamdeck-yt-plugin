@@ -7,7 +7,7 @@
     "content_scripts": [
         {
             "matches": ["*://*.youtube.com/*"],
-            "js": ["youtube.js", "steamdeck.js", "content.js"]
+            "js": ["utils.js", "youtube.js", "steamdeck.js", "content.js"]
         }
     ]
 }
