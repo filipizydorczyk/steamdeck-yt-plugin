@@ -21,4 +21,12 @@ document.addEventListener("keydown", (event) => {
         event.preventDefault();
         ytService.focusNextThumbnail();
     }
+    if (event.key === B) {
+        event.preventDefault();
+        ytService.goPreviousPage();
+    }
+    if (event.key === A) {
+        event.preventDefault();
+        ytService.goCurrentSelection();
+    }
 });

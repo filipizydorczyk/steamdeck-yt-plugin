@@ -19,6 +19,10 @@ class YouTubeReposiotry {
         return row.getElementsByTagName("ytd-thumbnail");
     }
 
+    getThumbnailLink(thumbnail) {
+        return thumbnail.getElementsByTagName("a")[0];
+    }
+
     setThumbnailHovereStyle(thumbnail) {
         thumbnail.style["border"] = "4px solid #FF0000";
         thumbnail.style["border-radius"] = "12px";
@@ -38,6 +42,7 @@ class YouTubeService {
     }
 
     focusNextRow() {
+        this.clearCurrentThumbnail();
         const grids = this.repository.getRows();
         this.row = getValueInRage(0, grids.length - 1, this.row + 1);
         this.thumbnail = 0;
@@ -48,10 +53,15 @@ class YouTubeService {
     }
 
     focusPerviousRow() {
+        this.clearCurrentThumbnail();
         const grids = this.repository.getRows();
 
         this.row = getValueInRage(0, grids.length - 1, this.row - 1);
+        this.thumbnail = 0;
         grids[this.row].scrollIntoView(SCROLL_OPTIONS);
+
+        const thumbnails = this.repository.getTumbnails(grids[this.row]);
+        this.repository.setThumbnailHovereStyle(thumbnails[this.thumbnail]);
     }
 
     focusPreviousThumbnail() {
@@ -86,5 +96,21 @@ class YouTubeService {
 
     handleMenuAction() {
         this.repository.getSideMenuButton().click();
+    }
+
+    clearCurrentThumbnail() {
+        const grids = this.repository.getRows();
+        const thumbnails = this.repository.getTumbnails(grids[this.row]);
+        this.repository.setElementEmptyStyle(thumbnails[this.thumbnail]);
+    }
+
+    goPreviousPage() {
+        window.history.go(-1);
+    }
+
+    goCurrentSelection() {
+        const grids = this.repository.getRows();
+        const thumbnails = this.repository.getTumbnails(grids[this.row]);
+        this.repository.getThumbnailLink(thumbnails[this.thumbnail]).click();
     }
 }
